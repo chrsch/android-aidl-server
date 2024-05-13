@@ -13,10 +13,12 @@ public class AIDLColorService extends Service {
 
     private static final String TAG = "AIDLColorService";
     public AIDLColorService() {
+        Log.d(TAG, "AIDLColorService() called");
     }
 
     @Override
     public IBinder onBind(Intent intent) {
+        Log.d(TAG, "onBind called");
         return binder;
     }
 

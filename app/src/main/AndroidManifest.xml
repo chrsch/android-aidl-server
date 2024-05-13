@@ -17,7 +17,7 @@
             android:enabled="true"
             android:exported="true">
             <intent-filter>
-                <action android:name="AIDLColorservice" />
+                <action android:name="IAIDLColorService" />
             </intent-filter>
         </service>
     </application>

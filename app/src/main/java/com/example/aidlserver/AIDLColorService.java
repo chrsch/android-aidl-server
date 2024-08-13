@@ -18,7 +18,7 @@ public class AIDLColorService extends Service {
 
     @Override
     public IBinder onBind(Intent intent) {
-        Log.d(TAG, "onBind called");
+        Log.d(TAG, "AIDLColorService::onBind called");
         return binder;
     }
 

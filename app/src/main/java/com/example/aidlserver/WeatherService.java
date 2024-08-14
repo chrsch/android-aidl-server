@@ -64,11 +64,17 @@ public class WeatherService extends Service {
         String urlString = "https://api.open-meteo.com/v1/forecast?latitude=48.13743&longitude=11.57549&hourly=temperature_2m&timezone=Europe%2FBerlin&forecast_days=1";
         URL url = new URL(urlString);
         HttpURLConnection urlConnection = (HttpURLConnection) url.openConnection();
+
         try {
             urlConnection.setRequestMethod("GET");
             urlConnection.setConnectTimeout(5000);
             urlConnection.setReadTimeout(5000);
             urlConnection.connect();
+
+            int responseCode = urlConnection.getResponseCode();
+            if (responseCode != HttpURLConnection.HTTP_OK) {
+                throw new Exception("HTTP error code: " + responseCode);
+            }
 
             BufferedReader in = new BufferedReader(new InputStreamReader(urlConnection.getInputStream()));
             StringBuilder response = new StringBuilder();
@@ -80,6 +86,9 @@ public class WeatherService extends Service {
 
             in.close();
             return response.toString();
+        } catch (Exception e) {
+            Log.e(TAG, "Error fetching weather data", e);
+            throw e; // Re-throw the exception after logging it
         } finally {
             urlConnection.disconnect();
         }
